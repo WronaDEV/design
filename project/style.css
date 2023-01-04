@@ -1,0 +1,537 @@
+body {
+    background-color: #212121;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+  
+::-webkit-scrollbar-thumb:active {
+    background: #555;
+}
+
+:root {
+    --workspace-width: 640px;
+    --workspace-height: 360px;
+}
+
+#icon {
+    position: fixed;
+    width: 138px;
+    height: 55.5px;
+    margin: 20px;
+}
+
+#left-side-menu {
+    position: fixed;
+    width: 266px;
+    height: 100%;
+    background-color: black;
+    z-index: -1;
+}
+
+#create-element-button {
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: aqua;
+    box-shadow: 0 0 10px 10px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 90px;
+    margin-left: 33px;
+    box-shadow: 0 0 10px 1px aqua;
+    transition: all 1s;
+}
+
+#create-element-button:hover {
+    box-shadow: 0 0 50px 1px aqua;
+}
+
+.left-side-menu-buttons {
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #242424;
+    box-shadow: 0 0 10px 10px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-left: 33px;
+    box-shadow: 0 0 10px 1px #242424;
+    transition: all 1s;
+}
+
+.left-side-menu-buttons:hover {
+    box-shadow: 0 0 50px 1px #555;
+    background-color: #555;
+}
+
+#elements-list {
+    position: absolute;
+    width: 266px;
+    height: 350px;
+    background-color: #171717;
+    bottom: -20px;
+    overflow: scroll;
+    border-top: 2px solid gray;
+}
+
+.element-list-div {
+    width: 266px;
+    height: 60px;
+    background-color: #242424;
+}
+
+.element-list-image-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
+
+.element-list-text {
+    position: absolute;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+
+#create-element-menu {
+    position: absolute;
+    width: 430px;
+    height: 120px;
+    background-color: #3B3B3B;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+#create-element-menu::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 30px;
+    background-color: #171717;
+    z-index: -1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.unshow {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+#xmark {
+    width: 30px;
+    height: 30px;
+    margin-left: 400px;
+    cursor: pointer;
+}
+
+#create-element-menu-img {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    margin-top: 2px;
+    margin-left: 12px;
+}
+
+#create-element-menu-img-img {
+    width: 45px;
+    height: 45px;
+    margin: 2px;
+}
+
+#create-element-menu-img-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-left: -2px;
+}
+
+#create-element-menu-div {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    margin-top: -50px;
+    margin-left: 100px;
+}
+
+#create-element-menu-div-img {
+    width: 45px;
+    height: 45px;
+    margin: 2px;
+}
+
+#create-element-menu-div-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+#create-element-menu-txt {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    margin-top: -52px;
+    margin-left: 185px;
+}
+
+#create-element-menu-txt-img {
+    width: 45px;
+    height: 45px;
+    margin: 2px;
+}
+
+#create-element-menu-txt-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-left: 7px;
+}
+
+#create-element-menu-input {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    margin-top: -52px;
+    margin-left: 270px;
+}
+
+#create-element-menu-input-img {
+    width: 45px;
+    height: 45px;
+    margin: 2px;
+}
+
+#create-element-menu-input-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-left: 2px;
+}
+
+#create-element-menu-button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    margin-top: -52px;
+    margin-left: 360px;
+}
+
+#create-element-menu-button-img {
+    width: 45px;
+    height: 45px;
+    margin: 2px;
+}
+
+#create-element-menu-button-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-left: -4px;
+}
+
+#workspace {
+    position: absolute;
+    width: var(--workspace-width);
+    height: var(--workspace-height);
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    margin-top: calc(calc(var(--workspace-height) / 2) - calc(calc(var(--workspace-height) / 2) * 2));
+    margin-left: calc(calc(var(--workspace-width) / 2) - calc(calc(var(--workspace-width) / 2) * 2));
+    z-index: -2;
+}
+
+#element-menu-img {
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    background-color: #171717;
+    right: 0px;
+}
+
+#element-menu-xmark {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 265px;
+    cursor: pointer;
+}
+
+#element-menu-img-source-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+#element-menu-img-source-input {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-img-size-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+#element-menu-img-size-input1 {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-img-size-input2 {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+#element-menu-img-delete-button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    border-radius: 10px;
+    cursor: pointer;
+    left: -60px;
+    bottom: 10px;
+    box-shadow: aqua 0 0 10px 0.5px;
+    transition: all 1s;
+}
+
+#element-menu-img-delete-button:hover {
+    background-color: red;
+    box-shadow: red 0 0 10px 5px;
+}
+
+#element-menu-img-delete-icon {
+    width: 45px;
+    height: 45px;
+    margin: 3px;
+}
+
+#element-menu-div {
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    background-color: #171717;
+    right: 0px;
+}
+
+#element-menu-div-size-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#element-menu-div-size-input1 {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-div-size-input2 {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+#element-menu-div-background-color-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 80px;
+    margin-left: 10px;
+}
+
+#element-menu-div-background-color-input {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-text {
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    background-color: #171717;
+    right: 0px;
+}
+
+#element-menu-text-content-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#element-menu-text-content-input {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-text-font-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+#element-menu-text-font-input {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-text-size-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+#element-menu-text-size-input {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#element-menu-text-color-txt {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+#element-menu-text-color-input {
+    position: absolute;
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}

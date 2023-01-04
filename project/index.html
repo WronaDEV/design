@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>Wrona | Design</title>
+</head>
+<body onunload="onleave()">
+    <img src="../assets/icon.png" id="icon">
+    <div id="left-side-menu">
+        <button id="create-element-button" onclick="ShowCreateElementMenu()">Create element</button>
+        <button class="left-side-menu-buttons">Head</button>
+        <button class="left-side-menu-buttons">Body</button>
+        <button class="left-side-menu-buttons">Settings</button>
+        <div id="elements-list"></div>
+    </div>
+    <div id="create-element-menu" class="unshow">
+        <img src="../assets/xmark.png" id="xmark" onclick="HideCreateElementMenu()"></img>
+        <div id="create-element-menu-img" onclick="CreateImage();">
+            <img src="../assets/image-solid.svg" id="create-element-menu-img-img">
+            <span id="create-element-menu-img-txt">Image</span>
+        </div>
+        <div id="create-element-menu-div" onclick="CreateDiv()">
+            <img src="../assets/div-icon.png" id="create-element-menu-div-img">
+            <span id="create-element-menu-div-txt">Div</span>
+        </div>
+        <div id="create-element-menu-txt" onclick="CreateText()">
+            <img src="../assets/txt-icon.png" id="create-element-menu-txt-img">
+            <span id="create-element-menu-txt-txt">Text</span>
+        </div>
+        <div id="create-element-menu-input">
+            <img src="../assets/input-icon.png" id="create-element-menu-input-img">
+            <span id="create-element-menu-input-txt">Input</span>
+        </div>
+        <div id="create-element-menu-button">
+            <img src="../assets/button-icon.png" id="create-element-menu-button-img">
+            <span id="create-element-menu-button-txt">Button</span>
+        </div>
+    </div>
+    <div id="workspace">
+    </div>
+    <div id="element-menu-img" class="unshow">
+        <img src="../assets/xmark.png" id="element-menu-xmark" onclick="HideImageMenu();Desactive()"></img>
+        <p id="element-menu-img-source-txt">Source</p>
+        <input placeholder="Source..." id="element-menu-img-source-input" onblur="SaveImage()">
+        <p id="element-menu-img-size-txt">Size</p>
+        <input placeholder="Width..." id="element-menu-img-size-input1" onblur="SaveImage()">
+        <input placeholder="Height..." id="element-menu-img-size-input2" onblur="SaveImage()">
+        <div id="element-menu-img-delete-button" onclick="DeleteElement()">
+            <img src="../assets/trash-icon.png" id="element-menu-img-delete-icon">
+        </div>
+    </div>
+    <div id="element-menu-div" class="unshow">
+        <img src="../assets/xmark.png" id="element-menu-xmark" onclick="HideDivMenu();Desactive()"></img>
+        <p id="element-menu-div-size-txt">Size</p>
+        <input placeholder="Width..." id="element-menu-div-size-input1" onblur="SaveDiv()">
+        <input placeholder="Height..." id="element-menu-div-size-input2" onblur="SaveDiv()">
+        <p id="element-menu-div-background-color-txt">Background color</p>
+        <input placeholder="Color..." id="element-menu-div-background-color-input" onblur="SaveDiv()">
+        <div id="element-menu-img-delete-button" onclick="DeleteElement()">
+            <img src="../assets/trash-icon.png" id="element-menu-img-delete-icon">
+        </div>
+    </div>
+    <div id="element-menu-text" class="unshow">
+        <img src="../assets/xmark.png" id="element-menu-xmark" onclick="HideTextMenu();Desactive()"></img>
+        <p id="element-menu-text-content-txt">Content</p>
+        <input placeholder="Content..." id="element-menu-text-content-input" onblur="SaveText()">
+        <p id="element-menu-text-font-txt">Font</p>
+        <input placeholder="Font..." id="element-menu-text-font-input" onblur="SaveText()">
+        <p id="element-menu-text-size-txt">Size</p>
+        <input placeholder="Size..." id="element-menu-text-size-input" onblur="SaveText()">
+        <p id="element-menu-text-color-txt">Color</p>
+        <input placeholder="Color..." id="element-menu-text-color-input" onblur="SaveText()">
+        <div id="element-menu-img-delete-button" onclick="DeleteElement()">
+            <img src="../assets/trash-icon.png" id="element-menu-img-delete-icon">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
