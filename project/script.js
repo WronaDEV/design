@@ -102,9 +102,12 @@ function DecreaseLeftSideMenu() {
 //  });
 
 function ActiveSettings(arg) {
+    let ActiveElementSettingsId = "";
     if (arg == "project-settings") {
+        ActiveElementSettingsId.style.backgroundColor = "transparent";
         const ElementList = document.getElementById("project-settings-div");
-        ElementList.style.backgroundColor = "green";
+        ElementList.style.backgroundColor = "#008CFF";
+        let ActiveElementSettingsId = "project-settings-div";
     }
 }
 

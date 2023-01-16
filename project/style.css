@@ -302,7 +302,19 @@ body {
     margin: 20px;
 }
 
-#project-settings-size-input {
+#project-settings-size-input1 {
+    width: 200px;
+    height: 25px;
+    background-color: #3B3B3B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+#project-settings-size-input2 {
     width: 200px;
     height: 25px;
     background-color: #3B3B3B;
