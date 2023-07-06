@@ -1,13 +1,24 @@
 let show = 'show';
 let unshow = 'unshow';
-const CreateElementMenu = document.querySelector('#create-element-menu')
+const CreateElementMenu = document.querySelector('#create-element-menu');
 const workspace = document.querySelector('#workspace');
 let elements = [];
 let zoom = 0.4;
 const ZoomSpeed = 0.03;
 const ActiveElementListBackgroundColor = "linear-gradient(135deg, #0085ff 0%, #00ffd9 100%)";
 const ElementListBackgroundColor = "linear-gradient(135deg, #242424 0%, #242424 100%)";
+const BackgroundWorkspace = document.getElementById("background-workspace");
 
+
+BackgroundWorkspace.addEventListener("wheel", function(e) {  
+    if(e.deltaY > 0){
+        if (zoom > 0.06) {
+            workspace.style.transform = `scale(${zoom -= ZoomSpeed})`;
+        }
+    } else {    
+        workspace.style.transform = `scale(${zoom += ZoomSpeed})`;  
+    }
+});
 
 workspace.addEventListener("wheel", function(e) {  
     if(e.deltaY > 0){
@@ -101,36 +112,75 @@ function DecreaseLeftSideMenu() {
 //    }
 //  });
 
+function SaveBody() {
+    const BodyWidth = document.getElementById("project-settings-size-input1").value + "px";
+    const BodyHeight = document.getElementById("project-settings-size-input2").value + "px";
+    const BodyBackgroundColor = document.getElementById("project-settings-background-color-input").value;
+    document.documentElement.style.setProperty('--workspace-width', " " + BodyWidth);
+    document.documentElement.style.setProperty('--workspace-height', " " + BodyHeight);
+    workspace.style.backgroundColor = BodyBackgroundColor;
+    if (BodyWidth === "px") {
+        document.documentElement.style.setProperty('--workspace-width', " " + "1920px");
+    }
+    if (BodyHeight === "px") {
+        document.documentElement.style.setProperty('--workspace-height', " " + "1000px");
+    }
+}
+
 function ActiveSettings(arg) {
-    let ActiveElementSettingsId = "";
+    const ActiveElementSettingsId = localStorage.getItem("ActiveElementSettingsId");
+    const ActiveElementSettings = document.getElementById(ActiveElementSettingsId);
+    if (ActiveElementSettingsId) {
+        ActiveElementSettings.style.backgroundColor = "transparent";
+    }
     if (arg == "project-settings") {
-        ActiveElementSettingsId.style.backgroundColor = "transparent";
         const ElementList = document.getElementById("project-settings-div");
         ElementList.style.backgroundColor = "#008CFF";
-        let ActiveElementSettingsId = "project-settings-div";
+        localStorage.setItem("ActiveElementSettingsId", arg)
     }
 }
 
 function ShowSettingsMenu() {
+    HideCreateElementMenu();
+    HideImageMenu();
+    HideDivMenu();
+    HideTextMenu();
     const SettingsMenu = document.getElementById("settings-menu");
+    const SettingsButton = document.getElementById("settings-button");
+    const overlay = document.getElementById("overlay");
     if (~SettingsMenu.className.indexOf(unshow)) {
-        SettingsMenu.className = SettingsMenu.className.replace(unshow, show);
+        SettingsMenu.className = "show";
         ActiveSettings("project-settings");
+        overlay.className = "show";
     } else {
-        SettingsMenu.className = SettingsMenu.className.replace(show, unshow);
+        SettingsMenu.className = "unshow";
+        overlay.className = "unshow";
     }
+}
+
+function HideSettingsMenu() {
+    localStorage.removeItem("ActiveElementSettingsId");
+    const SettingsMenu = document.getElementById("settings-menu");
+    const overlay = document.getElementById("overlay");
+    SettingsMenu.className = "unshow";
+    overlay.className = "unshow";
 }
 
 function ShowCreateElementMenu() {
+    const overlay = document.getElementById("overlay");
     if (~CreateElementMenu.className.indexOf(unshow)) {
         CreateElementMenu.className = CreateElementMenu.className.replace(unshow, show);
+        overlay.className = "show";
     } else {
         CreateElementMenu.className = CreateElementMenu.className.replace(show, unshow);
+        overlay.className = "unshow";
     }
 }
 
-function HideCreateElementMenu() {;
-    CreateElementMenu.className = CreateElementMenu.className.replace(show, unshow);
+function HideCreateElementMenu() {
+    const overlay = document.getElementById("overlay");
+    CreateElementMenu.className = "unshow";
+    overlay.className = "unshow";
 }
 
 function ElementOnClick(event) {
@@ -143,13 +193,19 @@ function ElementListOnClick(event) {
     Active(ElementId);
 }
 
-function DeleteElement() {
-    if (elements.length === 0) {
-        const ElementListNoLayers = document.getElementById("elements-list-nothing-text");
-        ElementListNoLayers.className = ElementListNoLayers.className.replace(unshow, show);
+function RemoveObjectFromArray(arr, id) {
+    const objWithIdIndex = arr.findIndex((obj) => obj.id === id);
+
+    if (objWithIdIndex > -1) {
+      arr.splice(objWithIdIndex, 1);
     }
+  
+    return arr;
+  }
+
+function DeleteElement() {
     const ActiveElementId = localStorage.getItem("ElementActive");
-    localStorage.clear();
+    localStorage.removeItem("ElementActive");
     const ActiveElement = document.getElementById(ActiveElementId);
     const ActiveElementListId = ActiveElementId + "-id";
     const ActiveElementList = document.getElementById(ActiveElementListId);
@@ -158,6 +214,11 @@ function DeleteElement() {
     HideDivMenu();
     HideImageMenu();
     HideTextMenu();
+    RemoveObjectFromArray(elements, ActiveElementId);
+    if (elements.length === 0) {
+        const ElementListNoLayers = document.getElementById("elements-list-nothing-text");
+        ElementListNoLayers.className = "show";
+    }
 }
 
 function Desactive() {
@@ -169,7 +230,7 @@ function Desactive() {
         const ActiveElementList = document.getElementById(ActiveElementListId);
         ActiveElementList.style.backgroundImage = ElementListBackgroundColor;
     }
-    localStorage.clear();
+    localStorage.removeItem("ElementActive");
 }
 
 function WorkspaceOnClick() {
@@ -191,7 +252,7 @@ function Active(arg) {
     const ElementList = document.getElementById(ElementListId);
     const Element = document.getElementById(ElementId);
     ElementList.style.backgroundImage = ActiveElementListBackgroundColor;
-    localStorage.clear;
+    localStorage.removeItem("ElementActive");
     localStorage.setItem("ElementActive", ElementId);
     if (Element.nodeName === "IMG") {
         ShowImageMenu(ElementId);
@@ -206,6 +267,7 @@ function Active(arg) {
 }
 
 function ShowImageMenu(arg) {
+    HideCreateElementMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -222,13 +284,15 @@ function ShowImageMenu(arg) {
 }
 
 function HideImageMenu() {
+    HideCreateElementMenu();
     const ElementMenu = document.querySelector('#element-menu-img');
     ElementMenu.className = ElementMenu.className = "unshow";
 }
 
 function CreateImage() {
+    HideCreateElementMenu();
     const ElementListNoLayers = document.getElementById("elements-list-nothing-text");
-    ElementListNoLayers.className = CreateElementMenu.className.replace(show, unshow);
+    ElementListNoLayers.className = "unshow";
     Desactive();
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let ElementId = ""
@@ -259,10 +323,14 @@ function CreateImage() {
     div.appendChild(text);
     text.textContent = ElementId;
     text.className = "element-list-text";
-    elements.push(ElementId);
     div.style.backgroundImage = ActiveElementListBackgroundColor;
     ShowImageMenu(ElementId);
     Active(ElementId);
+    const Element = {
+        tag: elements.length + 1,
+        id: ElementId
+    }
+    elements.push(Element);
 }
 
 function SaveImage() {
@@ -281,6 +349,7 @@ function SaveImage() {
 }
 
 function ShowDivMenu(arg) {
+    HideCreateElementMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -292,16 +361,20 @@ function ShowDivMenu(arg) {
     document.getElementById('element-menu-div-size-input1').value = Element.style.width;
     document.getElementById('element-menu-div-size-input2').value = Element.style.height;
     document.getElementById('element-menu-div-background-color-input').value = Element.style.backgroundColor;
+    document.getElementById('element-menu-div-margin-input1').value = Element.style.marginTop;
+    document.getElementById('element-menu-div-margin-input2').value = Element.style.marginLeft;
 }
 
 function HideDivMenu() {
+    HideCreateElementMenu();
     const ElementMenu = document.querySelector('#element-menu-div');
     ElementMenu.className = ElementMenu.className = "unshow";
 }
 
 function CreateDiv() {
+    HideCreateElementMenu();
     const ElementListNoLayers = document.getElementById("elements-list-nothing-text");
-    ElementListNoLayers.className = CreateElementMenu.className.replace(show, unshow);
+    ElementListNoLayers.className = "unshow";
     Desactive();
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let ElementId = ""
@@ -317,7 +390,7 @@ function CreateDiv() {
     div.style.width = "100px";
     div.style.height = "100px";
     div.style.backgroundColor = "black";
-    localStorage.clear;
+    localStorage.removeItem("ElementActive");
     localStorage.setItem("ElementActive", ElementId);
     const ElementsList = document.getElementById('elements-list')
     const DivList = document.createElement("div");
@@ -333,9 +406,13 @@ function CreateDiv() {
     DivList.appendChild(text);
     text.textContent = ElementId;
     text.className = "element-list-text";
-    elements.push(ElementId);
     DivList.style.backgroundImage = ActiveElementListBackgroundColor;
     ShowDivMenu(ElementId);
+    const Element = {
+        tag: elements.length + 1,
+        id: ElementId
+    }
+    elements.push(Element);
 }
 
 function SaveDiv() {
@@ -343,13 +420,18 @@ function SaveDiv() {
     const ElementWidth = document.getElementById('element-menu-div-size-input1').value;
     const ElementHeight = document.getElementById('element-menu-div-size-input2').value;
     const ElementBackgroundColor = document.getElementById('element-menu-div-background-color-input').value;
+    const ElementMarginTop = document.getElementById('element-menu-div-margin-input1').value;
+    const ElementMarginLeft = document.getElementById('element-menu-div-margin-input2').value;
     const Element = document.getElementById(ElementId);
     Element.style.width = ElementWidth;
     Element.style.height = ElementHeight;
     Element.style.backgroundColor = ElementBackgroundColor;
+    Element.style.marginTop = ElementMarginTop;
+    Element.style.marginLeft = ElementMarginLeft;
 }
 
 function ShowTextMenu(arg) {
+    HideCreateElementMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -362,16 +444,20 @@ function ShowTextMenu(arg) {
     document.getElementById('element-menu-text-font-input').value = Element.style.fontFamily;
     document.getElementById('element-menu-text-size-input').value = Element.style.fontSize;
     document.getElementById('element-menu-text-color-input').value = Element.style.color;
+    document.getElementById('element-menu-text-margin-input1').value = Element.style.marginTop;
+    document.getElementById('element-menu-text-margin-input2').value = Element.style.marginLeft;
 }
 
 function HideTextMenu() {
+    HideCreateElementMenu();
     const ElementMenu = document.querySelector('#element-menu-text');
     ElementMenu.className = ElementMenu.className = "unshow";
 }
 
 function CreateText() {
+    HideCreateElementMenu();
     const ElementListNoLayers = document.getElementById("elements-list-nothing-text");
-    ElementListNoLayers.className = CreateElementMenu.className.replace(show, unshow);
+    ElementListNoLayers.className = "unshow";
     Desactive();
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let ElementId = ""
@@ -387,7 +473,7 @@ function CreateText() {
     text.style.margin = "0";
     text.style.fontSize = "50px";
     text.textContent = "Lorem Ipsum";
-    localStorage.clear;
+    localStorage.removeItem("ElementActive");
     localStorage.setItem("ElementActive", ElementId);
     const ElementsList = document.getElementById('elements-list')
     const DivList = document.createElement("div");
@@ -403,9 +489,13 @@ function CreateText() {
     DivList.appendChild(TextList);
     TextList.textContent = ElementId;
     TextList.className = "element-list-text";
-    elements.push(ElementId);
     DivList.style.backgroundImage = ActiveElementListBackgroundColor;
     ShowTextMenu(ElementId);
+    const Element = {
+        tag: elements.length + 1,
+        id: ElementId
+    }
+    elements.push(Element);
 }
 
 function SaveText() {
@@ -414,13 +504,33 @@ function SaveText() {
     const ElementFont = document.getElementById('element-menu-text-font-input').value;
     const ElementSize = document.getElementById('element-menu-text-size-input').value;
     const ElementColor = document.getElementById('element-menu-text-color-input').value;
+    const ElementMarginTop = document.getElementById('element-menu-text-margin-input1').value;
+    const ElementMarginLeft = document.getElementById('element-menu-text-margin-input2').value;
     const Element = document.getElementById(ElementId);
     Element.textContent = ElementContent;
     Element.style.fontFamily = ElementFont;
     Element.style.fontSize = ElementSize;
     Element.style.color = ElementColor;
+    Element.style.marginTop = ElementMarginTop;
+    Element.style.marginLeft = ElementMarginLeft;
+}
+
+function save() {
+    //if(arg == "DPROJ") {
+        let i = 0;
+        if (elements.length === 0) {
+            console.error("Maybe you should create something...");
+        } else {
+            while (i < elements.length) {
+                console.log(elements[i]);
+                i++;
+                console.log(i);
+            }
+        }
+    //}
 }
 
 function onleave() {
-    localStorage.clear();
+    localStorage.removeItem("ElementActive");
+    localStorage.removeItem("ActiveElementSettingsId");
 }

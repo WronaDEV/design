@@ -10,6 +10,7 @@
     <title>Wrona | Design</title>
 </head>
 <body onunload="onleave()">
+    <div id="overlay" onclick="HideCreateElementMenu();HideSettingsMenu()" class="unshow"></div>
     <div id="left-side-menu"> <!--
         <div id="decrease-left-side-menu-div" onclick="DecreaseLeftSideMenu()">
             <div id="decrease-left-side-menu-arrow" class="arrow-left"></div>
@@ -19,15 +20,15 @@
         <button id="create-element-button" onclick="ShowCreateElementMenu()">
             <img src="../assets/create-element-icon.png" class="left-side-menu-icons" id="create-element-icon">
             <p class="left-side-menu-buttons-text" id="create-element-button-text">Create element</p>
-        </button> <!--
-        <button class="left-side-menu-buttons" id="save-button">
+        </button>
+        <button class="left-side-menu-buttons" id="save-button" onclick="save()">
             <img src="../assets/save-icon.png" class="left-side-menu-icons" id="save-icon">
             <p class="left-side-menu-buttons-text" id="save-button-text">Save</p>
         </button>
         <button class="left-side-menu-buttons" id="settings-button" onclick="ShowSettingsMenu()">
             <img src="../assets/settings-icon.png" class="left-side-menu-icons" id="settings-icon">
             <p class="left-side-menu-buttons-text" id="settings-button-text">Settings</p>
-        </button> -->
+        </button>
         <div id="elements-list-header">
             <span id="elements-list-header-text">Layers Menu</span>
         </div>
@@ -38,6 +39,7 @@
     <div id="settings-menu" class="unshow">
         <div id="settings-menu-top-bar">
             <p id="settings-menu-top-bar-text">Settings</p>
+            <img src="../assets/xmark.png" id="settings-menu-top-bar-xmark" onclick="HideSettingsMenu()"></img>
         </div>
         <div id="settings-menu-left-side-menu">
             <div class="settings-menu-left-side-menu-element" id="project-settings-div" onclick="ActiveSettings('project-settings')">
@@ -47,8 +49,12 @@
         </div>
         <div id="project-settings" class="settings-content">
             <p id="project-settings-size-text">Size</p>
-            <input id="project-settings-size-input2" placeholder="Width...">
-            <input id="project-settings-size-input1" placeholder="Height...">
+            <input id="project-settings-size-input1" placeholder="Width..." onblur="SaveBody()">
+            <p id="project-settings-px-text1">px</p>
+            <input id="project-settings-size-input2" placeholder="Height..." onblur="SaveBody()">
+            <p id="project-settings-px-text2">px</p>
+            <p id="project-settings-background-color-text">Background color</p>
+            <input id="project-settings-background-color-input" placeholder="Color..." onblur="SaveBody()">
         </div>
     </div>
     <div id="create-element-menu" class="unshow">
@@ -86,8 +92,11 @@
         <p id="element-menu-img-margin-txt">Margin</p>
         <input placeholder="Top..." id="element-menu-img-margin-input1" onblur="SaveImage()">
         <input placeholder="Left..." id="element-menu-img-margin-input2" onblur="SaveImage()">
-        <div id="element-menu-img-delete-button" onclick="DeleteElement()">
-            <img src="../assets/trash-icon.png" id="element-menu-img-delete-icon">
+        <div class="element-menu-delete-button" onclick="DeleteElement()">
+            <img src="../assets/trash-icon.png" class="element-menu-delete-icon">
+        </div>
+        <div class="element-menu-animation-button">
+            <img src="../assets/animation-icon.png" class="element-menu-animation-icon">
         </div>
     </div>
     <div id="element-menu-div" class="unshow">
@@ -97,8 +106,14 @@
         <input placeholder="Height..." id="element-menu-div-size-input2" onblur="SaveDiv()">
         <p id="element-menu-div-background-color-txt">Background color</p>
         <input placeholder="Color..." id="element-menu-div-background-color-input" onblur="SaveDiv()">
-        <div id="element-menu-img-delete-button" onclick="DeleteElement()">
-            <img src="../assets/trash-icon.png" id="element-menu-img-delete-icon">
+        <p id="element-menu-div-margin-txt">Margin</p>
+        <input placeholder="Top..." id="element-menu-div-margin-input1" onblur="SaveDiv()">
+        <input placeholder="Left..." id="element-menu-div-margin-input2" onblur="SaveDiv()">
+        <div class="element-menu-delete-button" onclick="DeleteElement()">
+            <img src="../assets/trash-icon.png" class="element-menu-delete-icon">
+        </div>
+        <div class="element-menu-animation-button">
+            <img src="../assets/animation-icon.png" class="element-menu-animation-icon">
         </div>
     </div>
     <div id="element-menu-text" class="unshow">
@@ -111,8 +126,14 @@
         <input placeholder="Size..." id="element-menu-text-size-input" onblur="SaveText()">
         <p id="element-menu-text-color-txt">Color</p>
         <input placeholder="Color..." id="element-menu-text-color-input" onblur="SaveText()">
-        <div id="element-menu-img-delete-button" onclick="DeleteElement()">
-            <img src="../assets/trash-icon.png" id="element-menu-img-delete-icon">
+        <p id="element-menu-text-margin-txt">Margin</p>
+        <input placeholder="Top..." id="element-menu-text-margin-input1" onblur="SaveText()">
+        <input placeholder="Left..." id="element-menu-text-margin-input2" onblur="SaveText()">
+        <div class="element-menu-delete-button" onclick="DeleteElement()">
+            <img src="../assets/trash-icon.png" class="element-menu-delete-icon">
+        </div>
+        <div class="element-menu-animation-button">
+            <img src="../assets/animation-icon.png" class="element-menu-animation-icon">
         </div>
     </div>
     <script src="script.js"></script>
