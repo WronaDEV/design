@@ -1,6 +1,6 @@
 # Design
 
-Tool to design websites. This tool requires basic knowledge of HTML CSS.
+Tool to design websites. This tool requires basic knowledge of HTML & CSS.
 
 ### **[Link](https://wronadev.github.io/design/)**
 
