@@ -421,6 +421,64 @@ body {
     cursor: pointer;
 }
 
+.custom-code-button {
+    cursor: pointer;
+    width: 280px;
+    height: 50px;
+    background-color: #242424;
+    margin-top: 70px;
+    margin-left: 10px;
+    border: 0;
+    color: white;
+    font-size: 20px;
+}
+
+#custom-code-menu {
+    position: absolute;
+    width: 430px;
+    height: 160px;
+    background-color: #3B3B3B;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+#custom-code-menu::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 30px;
+    background-color: #171717;
+    z-index: -1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#custom-code-input1 {
+    color: white;
+    width: 390px;
+    height: 40px;
+    border: solid 2px #171717;
+    outline: none;
+    margin: 10px;
+    border-radius: 4px;
+    background-color: #242424;
+}
+
+#custom-code-input2 {
+    color: white;
+    width: 390px;
+    height: 40px;
+    border: solid 2px #171717;
+    outline: none;
+    margin-left: 10px;
+    margin-top: 0px;
+    border-radius: 4px;
+    background-color: #242424;
+}
+
 #create-element-menu-img {
     cursor: pointer;
     width: 50px;

@@ -1,13 +1,13 @@
 # Design
 
-Tool to design websites. This tool requires basic knowledge of HTML & CSS.
+Tool to design websites. This tool requires basic knowledge of HTML CSS.
 
 ### **[Link](https://wronadev.github.io/design/)**
 
 ## How to start?
-**1.** At first you should create your first element. To do that click **Create element** button. Next you will see menu. Click element which you want create.
+At first you should create your first element. To do that click **Create element** button. Next you will see menu. Click element which you want create.
 
-**2.** Now you can edit that element using **Element Menu** which is on the right side of the screen.
+Now you can edit that element using **Element Menu** which is on the right side of the screen.
 
 Properties for each elments:
  * **Image:** source, width, height

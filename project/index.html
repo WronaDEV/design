@@ -10,7 +10,7 @@
     <title>Wrona | Design</title>
 </head>
 <body onunload="onleave()">
-    <div id="overlay" onclick="HideCreateElementMenu();HideSettingsMenu()" class="unshow"></div>
+    <div id="overlay" onclick="HideCreateElementMenu();HideSettingsMenu();HideCustomCodeMenu()" class="unshow"></div>
     <div id="left-side-menu"> <!--
         <div id="decrease-left-side-menu-div" onclick="DecreaseLeftSideMenu()">
             <div id="decrease-left-side-menu-arrow" class="arrow-left"></div>
@@ -20,11 +20,11 @@
         <button id="create-element-button" onclick="ShowCreateElementMenu()">
             <img src="../assets/create-element-icon.png" class="left-side-menu-icons" id="create-element-icon">
             <p class="left-side-menu-buttons-text" id="create-element-button-text">Create element</p>
-        </button><!---
+        </button>
         <button class="left-side-menu-buttons" id="save-button" onclick="save()">
             <img src="../assets/save-icon.png" class="left-side-menu-icons" id="save-icon">
             <p class="left-side-menu-buttons-text" id="save-button-text">Save</p>
-        </button>-->
+        </button>
         <button class="left-side-menu-buttons" id="settings-button" onclick="ShowSettingsMenu()">
             <img src="../assets/settings-icon.png" class="left-side-menu-icons" id="settings-icon">
             <p class="left-side-menu-buttons-text" id="settings-button-text">Settings</p>
@@ -80,6 +80,11 @@
             <span id="create-element-menu-button-txt">Button</span>
         </div>
     </div>
+    <div id="custom-code-menu" class="unshow">
+        <img src="../assets/xmark.png" id="xmark" onclick="HideCustomCodeMenu()"></img>
+        <input id="custom-code-input1" placeholder="Style attribute...">
+        <input id="custom-code-input2" placeholder="Attribute value...">
+    </div>
     <div id="workspace"></div>
     <div id="background-workspace" onclick="WorkspaceOnClick()"></div>
     <div id="element-menu-img" class="unshow">
@@ -92,6 +97,7 @@
         <p id="element-menu-img-margin-txt">Margin</p>
         <input placeholder="Top..." id="element-menu-img-margin-input1" onblur="SaveImage()">
         <input placeholder="Left..." id="element-menu-img-margin-input2" onblur="SaveImage()">
+        <button class="custom-code-button" onclick="ShowCustomCodeMenu()">Custom code</button>
         <div class="element-menu-delete-button" onclick="DeleteElement()">
             <img src="../assets/trash-icon.png" class="element-menu-delete-icon">
         </div>

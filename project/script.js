@@ -142,6 +142,7 @@ function ActiveSettings(arg) {
 
 function ShowSettingsMenu() {
     HideCreateElementMenu();
+    HideCustomCodeMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -201,7 +202,7 @@ function RemoveObjectFromArray(arr, id) {
     }
   
     return arr;
-  }
+}
 
 function DeleteElement() {
     const ActiveElementId = localStorage.getItem("ElementActive");
@@ -237,6 +238,7 @@ function WorkspaceOnClick() {
     Desactive();
     HideImageMenu();
     HideDivMenu();
+    HideCustomCodeMenu();
     HideTextMenu();
 }
 
@@ -266,8 +268,28 @@ function Active(arg) {
     // Element.style.border = "2px solid aqua";
 }
 
+function ShowCustomCodeMenu() {
+    const overlay = document.getElementById("overlay");
+    const CustomCodeMenu = document.getElementById("custom-code-menu");
+    if (~CustomCodeMenu.className.indexOf(unshow)) {
+        CustomCodeMenu.className = CustomCodeMenu.className.replace(unshow, show);
+        overlay.className = "show";
+    } else {
+        CustomCodeMenu.className = CustomCodeMenu.className.replace(show, unshow);
+        overlay.className = "unshow";
+    }
+}
+
+function HideCustomCodeMenu() {
+    const CustomCodeMenu = document.getElementById("custom-code-menu");
+    const overlay = document.getElementById("overlay");
+    CustomCodeMenu.className = "unshow";
+    overlay.className = "unshow";
+}
+
 function ShowImageMenu(arg) {
     HideCreateElementMenu();
+    HideCustomCodeMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -350,6 +372,7 @@ function SaveImage() {
 
 function ShowDivMenu(arg) {
     HideCreateElementMenu();
+    HideCustomCodeMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -432,6 +455,7 @@ function SaveDiv() {
 
 function ShowTextMenu(arg) {
     HideCreateElementMenu();
+    HideCustomCodeMenu();
     HideImageMenu();
     HideDivMenu();
     HideTextMenu();
@@ -516,7 +540,7 @@ function SaveText() {
 }
 
 function save() {
-    //if(arg == "DPROJ") {
+    //if(arg == "PROJ") {
         let i = 0;
         if (elements.length === 0) {
             console.error("Maybe you should create something...");
