@@ -13,3 +13,6 @@ Properties for each elments:
  * **Image:** source, width, height
  * **Div:** width, height, background-color
  * **Text:** content, font-family, font-size, color
+
+## Soon
+Custom attributes
