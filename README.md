@@ -15,4 +15,4 @@ Properties for each elments:
  * **Text:** content, font-family, font-size, color
 
 ## Soon
-Custom style attributes
+**Custom style attributes**
