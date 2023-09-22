@@ -1,3 +1,5 @@
+<img src="assets/design-icon.png">
+
 # Design
 
 Tool to design websites. This tool requires basic knowledge of HTML & CSS.
