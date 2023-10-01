@@ -20,7 +20,7 @@ BackgroundWorkspace.addEventListener("wheel", function(e) {
     }
 });
 
-workspace.addEventListener("wheel", function(e) {  
+workspace.addEventListener("wheel", function(e) {
     if(e.deltaY > 0){
         if (zoom > 0.06) {
             workspace.style.transform = `scale(${zoom -= ZoomSpeed})`;
@@ -538,7 +538,7 @@ function SaveText() {
     Element.style.marginTop = ElementMarginTop;
     Element.style.marginLeft = ElementMarginLeft;
 }
-
+// Func Save - Looping all style values and translating that to HTML&CSS or other langs
 function save() {
     //if(arg == "PROJ") {
         let i = 0;
